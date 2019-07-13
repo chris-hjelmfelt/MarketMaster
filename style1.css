@@ -1,0 +1,34 @@
+body {
+    background-color: #0099ff;
+	font-size: 90%;
+}
+
+h2 {
+	color: navy;
+}
+
+#title { 
+	color: navy;
+	font-size: 25px 
+}
+
+#endtitle { 
+	font-size: 22px 
+}
+
+#error { color: red; }
+
+#outline { 
+	float: center;
+	background-color: #00ccff;
+	border: 3px solid black;
+	width: 770px;
+}
+
+#scoreboard{
+	float: center;
+	background-color: #00ccff;
+	border: 3px solid black;
+	width: 770px;
+	height: 600px;
+}

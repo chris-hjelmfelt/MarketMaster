@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Stockmarket Game</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+<body>
+<table id="scoreboard" align="center"><tr><td align="center" valign="bottom">
+<img src="title.jpg"><p>
+<b><span id="endtitle">10 days have passed<br>
+Game over</span></b>
+<h2><span id="win"></span></h2>
+<table width="90%"><tr><td width="360" align="center">
+<h2>Score</h2>
+<h2>$ <span id="score">0</span></h2>
+</td><td align="center">
+<span id="title">Previous Best Score:</span>
+<h2>$ <span id="previous">0</span></h2>
+</td></tr>
+<tr><td colspan="2" align="center">
+<button onclick="restart()" type="button">Play Again</button><br> 
+</td></tr></table>
+
+<img src="endbottom.jpg">
+</td></tr></table>
+
+<script>
+var profit = window.location.search;
+var winMessage = "New High Score";
+profit = profit.substring(1);
+profit = Number(profit).toFixed(2);
+var previous = 0;
+document.getElementById("score").innerHTML = profit; 
+if( localStorage.previous ) {
+	previous = localStorage.getItem("previous");
+	document.getElementById("previous").innerHTML = previous; 
+}
+
+if( profit > previous ) {
+	document.getElementById("win").innerHTML = winMessage;
+}
+
+function restart() {
+	window.location.assign("stockmarket.html");
+}
+</script>
+
+</body>
+</html>

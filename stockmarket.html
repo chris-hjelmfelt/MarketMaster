@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+<header>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
+</header>
+<body>
+<table id="outline" align="center"><tr><td valign="top">
+<table width="100%">
+<tr><td colspan="6">
+
+<table width="100%"><tr><td>
+<b id="title">Portfolio </b></td><td>
+<button onclick="pause()" type="button">pause</button> &nbsp; &nbsp; &nbsp; &nbsp;
+<button onclick="restart()" type="button">reset</button></td></tr>
+<tr><td >
+<div align="center"><b><span id="error">&nbsp;</span></b></div></td></tr>
+<tr><td>
+<b>Cash $<span id="cash">1000</span></b><br>
+</td><td>
+<b>Total Profit $<span id="profit">0</span></b><br>
+</td></tr><tr><td>
+<b>Day: <span id="day">1</span></b>
+</td><td>
+<b>Your high score $<span id="highScore">0</span></b><br>
+</td></tr></table>
+
+</td><td align="center">
+<img src="globe.jpg" width="150" height="150">
+</td></tr><tr><td colspan="7">
+<hr>
+
+</td></tr><tr><td>       
+<b>Sector</b> </td><td>Current<br>Price </td><td>Shares<br>Owned </td><td>Ave Price<br>Paid </td><td>Last<br>Change </td>
+<td width="134">&nbsp;</td><td width="180">&nbsp;</td></tr>
+<tr><td>
+Aerospace </td><td>
+$<span id="A2Aprice"></span> </td><td>
+<span id="A2Ash">0</span> </td><td>
+<span id="A2App">0</span></td><td>
+<span id="A2Ach">0</span><br> </td><td colspan="2">
+<button onclick="buystock(A2A)" type="button">Buy</button>
+<button onclick="buy20(A2A)" type="button">Buy 20</button>
+<button onclick="buyall(A2A)" type="button">Buy All</button>
+<button onclick="sellstock(A2A)" type="button">Sell</button>
+<button onclick="sellall(A2A)" type="button">Sell All</button>
+</td></tr><tr><td>
+Agriculture </td><td>
+$<span id="XP7price"></span> </td><td>
+<span id="XP7sh">0</span> </td><td>
+<span id="XP7pp">0</span></td><td>
+<span id="XP7ch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(XP7)" type="button">Buy</button>
+<button onclick="buy20(XP7)" type="button">Buy 20</button>
+<button onclick="buyall(XP7)" type="button">Buy All</button>
+<button onclick="sellstock(XP7)" type="button">Sell</button>
+<button onclick="sellall(XP7)" type="button">Sell All</button>
+</td></tr><tr><td>
+Energy </td><td>
+$<span id="B4Hprice"></span> </td><td>
+<span id="B4Hsh">0</span> </td><td>
+<span id="B4Hpp">0</span></td><td>
+<span id="B4Hch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(B4H)" type="button">Buy</button>
+<button onclick="buy20(B4H)" type="button">Buy 20</button>
+<button onclick="buyall(B4H)" type="button">Buy All</button>
+<button onclick="sellstock(B4H)" type="button">Sell</button>
+<button onclick="sellall(B4H)" type="button">Sell All</button>
+</td></tr><tr><td>
+Finance </td><td>
+$<span id="GT9price"></span> </td><td>
+<span id="GT9sh">0</span> </td><td>
+<span id="GT9pp">0</span></td><td>
+<span id="GT9ch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(GT9)" type="button">Buy</button>
+<button onclick="buy20(GT9)" type="button">Buy 20</button>
+<button onclick="buyall(GT9)" type="button">Buy All</button>
+<button onclick="sellstock(GT9)" type="button">Sell</button>
+<button onclick="sellall(GT9)" type="button">Sell All</button>
+</td></tr><tr><td>
+Medical </td><td>
+$<span id="YG3price"></span> </td><td>
+<span id="YG3sh">0</span> </td><td>
+<span id="YG3pp">0</span></td><td>
+<span id="YG3ch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(YG3)" type="button">Buy</button>
+<button onclick="buy20(YG3)" type="button">Buy 20</button>
+<button onclick="buyall(YG3)" type="button">Buy All</button>
+<button onclick="sellstock(YG3)" type="button">Sell</button>
+<button onclick="sellall(YG3)" type="button">Sell All</button>
+</td></tr><tr><td>
+Mining </td><td>
+$<span id="M8Eprice"></span> </td><td>
+<span id="M8Esh">0</span> </td><td>
+<span id="M8Epp">0</span></td><td>
+<span id="M8Ech">0</span><br> </td><td colspan="2">
+<button onclick="buystock(M8E)" type="button">Buy</button>
+<button onclick="buy20(M8E)" type="button">Buy 20</button>
+<button onclick="buyall(M8E)" type="button">Buy All</button>
+<button onclick="sellstock(M8E)" type="button">Sell</button>
+<button onclick="sellall(M8E)" type="button">Sell All</button>
+</td></tr><tr><td>
+Retail </td><td>
+$<span id="PK0price"></span> </td><td>
+<span id="PK0sh">0</span> </td><td>
+<span id="PK0pp">0</span></td><td>
+<span id="PK0ch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(PK0)" type="button">Buy</button>
+<button onclick="buy20(PK0)" type="button">Buy 20</button>
+<button onclick="buyall(PK0)" type="button">Buy All</button>
+<button onclick="sellstock(PK0)" type="button">Sell</button>
+<button onclick="sellall(PK0)" type="button">Sell All</button>
+</td></tr><tr><td>
+Technology </td><td>
+$<span id="W1Dprice"></span> </td><td>
+<span id="W1Dsh">0</span> </td><td>
+<span id="W1Dpp">0</span></td><td>
+<span id="W1Dch">0</span><br> </td><td colspan="2">
+<button onclick="buystock(W1D)" type="button">Buy</button>
+<button onclick="buy20(W1D)" type="button">Buy 20</button>
+<button onclick="buyall(W1D)" type="button">Buy All</button>
+<button onclick="sellstock(W1D)" type="button">Sell</button>
+<button onclick="sellall(W1D)" type="button">Sell All</button>
+
+</td></tr><tr><td colspan="7">
+<hr>
+</td></tr><tr><td colspan="2">
+Portfolio Value: <br>
+&nbsp;
+</td><td colspan="3">
+$<span id="value">0</span><br>
+(not including cash) 
+</td><td colspan="2" align="center">
+<img src="money3.jpg" width="200" height="111">
+</td></tr></table>
+</td></tr></table>
+
+<script>
+var kongregate;
+// Called when the API is finished loading
+function onLoadCompleted(){
+   // Get a global reference to the kongregate API. This way, pages included in the
+   // iframe can access it by using "parent.kongregate"
+   kongregate = kongregateAPI.getAPI();
+}   
+// Begin the process of loading the Kongregate API:
+kongregateAPI.loadAPI(onLoadCompleted);
+		
+
+var A2A = {shid: "A2Ash", stock: 0, cost: 10.00, change: 0, purch: 0, ppid: "A2App", bonus: 0};
+var XP7 = {shid: "XP7sh", stock: 0, cost: 3.00, change: 0, purch: 0, ppid: "XP7pp", bonus: 0};
+var B4H = {shid: "B4Hsh", stock: 0, cost: 8.00, change: 0, purch: 0, ppid: "B4Hpp", bonus: 0};
+var GT9 = {shid: "GT9sh", stock: 0, cost: 12.00, change: 0, purch: 0, ppid: "GT9pp", bonus: 0};
+var YG3 = {shid: "YG3sh", stock: 0, cost: 10.00, change: 0, purch: 0, ppid: "YG3pp", bonus: 0};
+var M8E = {shid: "M8Esh", stock: 0, cost: 5.00, change: 0, purch: 0, ppid: "M8Epp", bonus: 0};
+var PK0 = {shid: "PK0sh", stock: 0, cost: 6.00, change: 0, purch: 0, ppid: "PK0pp", bonus: 0};
+var W1D = {shid: "W1Dsh", stock: 0, cost: 8.00, change: 0, purch: 0, ppid: "W1Dpp", bonus: 0};
+
+var stockT = setInterval(stockTick, 2000);
+var value = 0;
+var day = 1;
+var profit = 0;
+var pauseflag = false;
+var tickCount = 0;
+cash = 1000;
+var highscore = 0;
+if( localStorage.highscore )
+	highscore = localStorage.getItem("highscore");
+document.getElementById("highScore").innerHTML = highscore;
+
+// controls all tick actions
+function stockTick() { 
+		A2A.change = priceChange(A2A.cost, 12, 10, 200);	
+		A2A.cost = A2A.cost + A2A.change;
+		XP7.change = priceChange(XP7.cost, 4, 3, 50);
+		XP7.cost = XP7.cost + XP7.change;
+		B4H.change = priceChange(B4H.cost, 10, 8, 120);
+		B4H.cost = B4H.cost + B4H.change;
+		GT9.change = priceChange(GT9.cost, 6, 12, 100);
+		GT9.cost = GT9.cost + GT9.change;
+		YG3.change = priceChange(YG3.cost, 5, 10, 120);	
+		YG3.cost = YG3.cost + YG3.change;
+		M8E.change = priceChange(M8E.cost, 4, 5, 70);
+		M8E.cost = M8E.cost + M8E.change;
+		PK0.change = priceChange(PK0.cost, 4, 6, 80);
+		PK0.cost = PK0.cost + PK0.change;
+		W1D.change = priceChange(W1D.cost, 10, 8, 120);
+		W1D.cost = W1D.cost + W1D.change;	
+		document.getElementById("A2Ach").innerHTML = Number(A2A.change).toFixed(2);
+		document.getElementById("XP7ch").innerHTML = Number(XP7.change).toFixed(2);
+		document.getElementById("B4Hch").innerHTML = Number(B4H.change).toFixed(2);
+		document.getElementById("GT9ch").innerHTML = Number(GT9.change).toFixed(2);
+		document.getElementById("YG3ch").innerHTML = Number(YG3.change).toFixed(2);
+		document.getElementById("M8Ech").innerHTML = Number(M8E.change).toFixed(2);
+		document.getElementById("PK0ch").innerHTML = Number(PK0.change).toFixed(2);
+		document.getElementById("W1Dch").innerHTML = Number(W1D.change).toFixed(2);
+		document.getElementById("A2Aprice").innerHTML = Number(A2A.cost).toFixed(2);
+		document.getElementById("XP7price").innerHTML = Number(XP7.cost).toFixed(2);
+		document.getElementById("B4Hprice").innerHTML = Number(B4H.cost).toFixed(2);
+		document.getElementById("GT9price").innerHTML = Number(GT9.cost).toFixed(2);		
+		document.getElementById("YG3price").innerHTML = Number(YG3.cost).toFixed(2);
+		document.getElementById("M8Eprice").innerHTML = Number(M8E.cost).toFixed(2);
+		document.getElementById("PK0price").innerHTML = Number(PK0.cost).toFixed(2);
+		document.getElementById("W1Dprice").innerHTML = Number(W1D.cost).toFixed(2);
+		value = A2A.stock*A2A.cost + XP7.stock*XP7.cost + B4H.stock*B4H.cost + GT9.stock*GT9.cost + YG3.stock*YG3.cost + M8E.stock*M8E.cost + PK0.stock*PK0.cost + W1D.stock*W1D.cost;	
+		document.getElementById("value").innerHTML = value.toFixed(2);
+		
+		if(tickCount == 20){
+			day++; 
+			document.getElementById("day").innerHTML = day;
+			if(day > 10) {   	//end game
+				end();
+			}
+			tickCount = 0;		
+		}
+		tickCount++;
+}
+
+function priceChange(curr, flux, min, max)
+{
+	rand = Math.random() * flux; 
+	change = 0;
+	if ( rand < (flux/2) && curr < max )
+		change = rand;
+	else if ( rand > (flux/2) && curr > min )
+		change = - rand + (flux/2);
+	else
+		change = 0;
+	return change;	
+}
+
+function buystock(comp) {
+	if(cash >= comp.cost) {	
+		comp.stock++;
+		cash = cash - comp.cost;	
+		document.getElementById(comp.shid).innerHTML = comp.stock;	
+		document.getElementById("cash").innerHTML = cash.toFixed(2);
+		comp.purch = ((comp.purch*(comp.stock-1)) + comp.cost)/comp.stock;			
+		document.getElementById(comp.ppid).innerHTML = Number(comp.purch).toFixed(2);
+	}
+}
+
+function buy20(comp) {
+	if(cash >= (comp.cost * 20)) {	
+		comp.stock = comp.stock + 20;
+		cash = cash - (comp.cost * 20);	
+		document.getElementById(comp.shid).innerHTML = comp.stock;	
+		document.getElementById("cash").innerHTML = cash.toFixed(2);
+		comp.purch = ((comp.purch*(comp.stock-20)) + (comp.cost*20))/comp.stock;			
+		document.getElementById(comp.ppid).innerHTML = Number(comp.purch).toFixed(2);
+	}
+}
+
+function buyall(comp) { 
+	var num = 0;
+	for(i=0; cash >= comp.cost; i++)
+	{
+		comp.stock++;
+		cash = cash - comp.cost;
+		num++;
+	}				
+	document.getElementById(comp.shid).innerHTML = comp.stock;	
+	document.getElementById("cash").innerHTML = cash.toFixed(2);
+	comp.purch = ((comp.purch*(comp.stock-num)) + (comp.cost*num))/comp.stock;			
+	document.getElementById(comp.ppid).innerHTML = Number(comp.purch).toFixed(2);
+}
+
+function sellstock(comp) {
+	if(comp.stock >= 1) {	
+		comp.stock--;
+		cash = cash + comp.cost;
+		document.getElementById(comp.shid).innerHTML = comp.stock;
+		document.getElementById("cash").innerHTML = cash.toFixed(2);
+		profit = profit + (comp.cost-comp.purch);
+		if(comp.stock == 0)
+			document.getElementById(comp.ppid).innerHTML = 0;
+		document.getElementById("profit").innerHTML = profit.toFixed(2);
+	}	
+}
+
+function sellall(comp) {
+	var num = 0;
+	for(i=0; comp.stock > 0; i++) {	
+		comp.stock--;
+		cash = cash + comp.cost;
+		num++;
+	}
+	document.getElementById(comp.shid).innerHTML = comp.stock;
+	document.getElementById("cash").innerHTML = cash.toFixed(2);
+	profit = profit + ((comp.cost - comp.purch)*num);
+	document.getElementById(comp.ppid).innerHTML = 0;	
+	document.getElementById("profit").innerHTML = profit.toFixed(2);
+}
+
+// pause the game
+function pause() {
+	if(!pauseflag) {
+		pauseflag = true;
+		clearInterval(stockT); //stop time
+	}
+	else {
+		pauseflag = false;
+		stockT = setInterval(stockTick, 2000); //start time
+	}
+}
+
+function restart() {
+	window.location.assign("stockmarket.html");
+}
+
+// Game over
+function end() {
+	if( profit > highscore )
+	{
+		localStorage.setItem("highscore", profit.toFixed(2));
+	}
+	localStorage.setItem("previous", highscore);
+		
+	//kongregate.stats.submit("Profit", profit);
+		
+	var sendString = profit.toString();
+	window.location.assign("end.html?" + profit);	
+}
+
+
+</script>
+
+
+
+</body>
+</html>
