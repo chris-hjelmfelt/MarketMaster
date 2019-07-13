@@ -32,3 +32,18 @@ h2 {
 	width: 770px;
 	height: 600px;
 }
+
+#hintdiv {
+	width:400px;
+	height:100px;	
+	top:448px;
+	left:18px;	
+	opacity:1;
+	padding:5px;
+	position:fixed;
+	background-color:#99eeff;
+	border-radius: 5px;
+    border: 2px solid #000; 
+	word-wrap: normal;
+	display: block;
+}

@@ -1,34 +1,41 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<!-- TO DO
+Instructions and hints, colored text for hints to buy and sell 
+colored text warning that time is almost out,
+figure out public high scores -->
+
 <html>
 <header>
 <link rel="stylesheet" type="text/css" href="style1.css">
 <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
+<meta charset="UTF-8"> 
 </header>
 <body>
-<table id="outline" align="center"><tr><td valign="top">
+
+<table id="outline" align="left"><tr><td valign="top">
 <table width="100%">
 <tr><td colspan="6">
 
 <table width="100%"><tr><td>
-<b id="title">Portfolio </b></td><td>
-<button onclick="pause()" type="button">pause</button> &nbsp; &nbsp; &nbsp; &nbsp;
-<button onclick="restart()" type="button">reset</button></td></tr>
-<tr><td >
+<b id="title">Portfolio </b></td><td colspan="2">
+<button onclick="pause()" type="button">Pause</button> &nbsp; &nbsp; &nbsp; &nbsp;
+<button onclick="restart()" type="button">Reset</button>&nbsp; &nbsp; &nbsp; &nbsp;
+<button onclick="hints()" type="button" id="hintbutton">Turn Off Hints</button>
+</td></tr>
+<tr><td>
 <div align="center"><b><span id="error">&nbsp;</span></b></div></td></tr>
 <tr><td>
 <b>Cash $<span id="cash">1000</span></b><br>
 </td><td>
-<b>Total Profit $<span id="profit">0</span></b><br>
+<b>Portfolio Value: $<span id="value">0</span> </b>
+</td><td>
+<b>Your high score $<span id="highScore">0</span></b><br>
 </td></tr><tr><td>
 <b>Day: <span id="day">1</span></b>
 </td><td>
-<b>Your high score $<span id="highScore">0</span></b><br>
+<b>Time Left: <span class="color" id="daysLeft">10</span> <span class="color">days and</span> <span class="color" id="hoursLeft">0</span> <span class="color">hours</span></b><br>
+</td><td>
+<span id="testing"></a>
 </td></tr></table>
 
 </td><td align="center">
@@ -130,29 +137,26 @@ $<span id="W1Dprice"></span> </td><td>
 
 </td></tr><tr><td colspan="7">
 <hr>
-</td></tr><tr><td colspan="2">
-Portfolio Value: <br>
-&nbsp;
-</td><td colspan="3">
-$<span id="value">0</span><br>
-(not including cash) 
+</td></tr><tr><td colspan="2" valign="top">
+</td><td colspan="3" valign="top">
 </td><td colspan="2" align="center">
 <img src="money3.jpg" width="200" height="111">
 </td></tr></table>
+<div id='hintdiv'>
+	<span id="hint">Buy several different stocks not just one. Otherwise you can get stuck if the market doesn't go your way.</span>
+</div>
 </td></tr></table>
 
-<script>
-var kongregate;
-// Called when the API is finished loading
-function onLoadCompleted(){
-   // Get a global reference to the kongregate API. This way, pages included in the
-   // iframe can access it by using "parent.kongregate"
-   kongregate = kongregateAPI.getAPI();
-}   
-// Begin the process of loading the Kongregate API:
-kongregateAPI.loadAPI(onLoadCompleted);
-		
 
+
+		
+<script>
+/* can't get this to work  -- unfortunately that means no high scores 
+kongregateAPI.loadAPI(function(){
+  window.kongregate = kongregateAPI.getAPI();
+  document.getElementById("testing").innerHTML = "API";
+});		
+*/
 var A2A = {shid: "A2Ash", stock: 0, cost: 10.00, change: 0, purch: 0, ppid: "A2App", bonus: 0};
 var XP7 = {shid: "XP7sh", stock: 0, cost: 3.00, change: 0, purch: 0, ppid: "XP7pp", bonus: 0};
 var B4H = {shid: "B4Hsh", stock: 0, cost: 8.00, change: 0, purch: 0, ppid: "B4Hpp", bonus: 0};
@@ -161,21 +165,27 @@ var YG3 = {shid: "YG3sh", stock: 0, cost: 10.00, change: 0, purch: 0, ppid: "YG3
 var M8E = {shid: "M8Esh", stock: 0, cost: 5.00, change: 0, purch: 0, ppid: "M8Epp", bonus: 0};
 var PK0 = {shid: "PK0sh", stock: 0, cost: 6.00, change: 0, purch: 0, ppid: "PK0pp", bonus: 0};
 var W1D = {shid: "W1Dsh", stock: 0, cost: 8.00, change: 0, purch: 0, ppid: "W1Dpp", bonus: 0};
-
 var stockT = setInterval(stockTick, 2000);
 var value = 0;
-var day = 1;
+var day = 10;
+var hour = 0;
 var profit = 0;
 var pauseflag = false;
+var hintsOn = true;
+var nextHint = 1;
+var hintTiming = 1;
 var tickCount = 0;
-cash = 1000;
+var cash = 1000;
 var highscore = 0;
-if( localStorage.highscore )
+var score = cash + value;
+if( localStorage.highscore ){
 	highscore = localStorage.getItem("highscore");
+}
 document.getElementById("highScore").innerHTML = highscore;
 
 // controls all tick actions
 function stockTick() { 
+		// Update all price info
 		A2A.change = priceChange(A2A.cost, 12, 10, 200);	
 		A2A.cost = A2A.cost + A2A.change;
 		XP7.change = priceChange(XP7.cost, 4, 3, 50);
@@ -210,16 +220,37 @@ function stockTick() {
 		document.getElementById("W1Dprice").innerHTML = Number(W1D.cost).toFixed(2);
 		value = A2A.stock*A2A.cost + XP7.stock*XP7.cost + B4H.stock*B4H.cost + GT9.stock*GT9.cost + YG3.stock*YG3.cost + M8E.stock*M8E.cost + PK0.stock*PK0.cost + W1D.stock*W1D.cost;	
 		document.getElementById("value").innerHTML = value.toFixed(2);
-		
-		if(tickCount == 20){
-			day++; 
-			document.getElementById("day").innerHTML = day;
-			if(day > 10) {   	//end game
-				end();
-			}
-			tickCount = 0;		
+			
+		// Keep track of the day and amount of time left
+		changeTime();	
+		// Display a message at bottom giving player advice
+		if (hour == 0 || hour == 12){								
+			switchHints();
+		}		
+		tickCount++;	
+		//document.getElementById("testing").innerHTML = "";
+}
+
+function changeTime(){
+	hour--;		
+	if (hour < 0) {
+		hour = 23;	
+		day--; 				
+	}	
+	if (parseInt(hour) == parseInt(0)){
+		if (parseInt(day) <= parseInt(0)) {   	//end game
+			end();
 		}
-		tickCount++;
+	}	
+	if (day == 0 && hour < 13){
+		var selects = document.getElementsByClassName("color");
+		for(var i = 0; i < selects.length; i++){
+			selects[i].style.color = "red";
+		}
+	}	
+	document.getElementById("day").innerHTML = 10 - day ;	
+	document.getElementById("daysLeft").innerHTML = day;
+	document.getElementById("hoursLeft").innerHTML = hour;
 }
 
 function priceChange(curr, flux, min, max)
@@ -277,7 +308,7 @@ function sellstock(comp) {
 		cash = cash + comp.cost;
 		document.getElementById(comp.shid).innerHTML = comp.stock;
 		document.getElementById("cash").innerHTML = cash.toFixed(2);
-		profit = profit + (comp.cost-comp.purch);
+		profit = profit + (comp.cost-comp.purch);                
 		if(comp.stock == 0)
 			document.getElementById(comp.ppid).innerHTML = 0;
 		document.getElementById("profit").innerHTML = profit.toFixed(2);
@@ -298,6 +329,71 @@ function sellall(comp) {
 	document.getElementById("profit").innerHTML = profit.toFixed(2);
 }
 
+function hints(){
+	if (hintsOn == false) {
+		document.getElementById("hintbutton").innerHTML = "Turn Off Hints";
+		document.getElementById('hintdiv').style.display = "block";
+		hintsOn = true;
+	} else {	
+		document.getElementById("hintbutton").innerHTML = "Turn On Hints";
+		document.getElementById('hintdiv').style.display = "none";
+		hintsOn = false;
+	}
+}
+
+function switchHints() {
+	nextHint++;
+	if (nextHint == 15){ 
+		nextHint == 1; 
+	}	
+	switch(nextHint) {
+	  case 1:
+		document.getElementById("hint").innerHTML = "Buy several different stocks not just one. Otherwise you can get stuck if the market doesn't go your way."
+		break;
+	  case 2:
+		document.getElementById("hint").innerHTML = "Buy at a low price and don't sell till it rises higher. It might take a little while but as long as you don't buy at the highest price you will eventually be able to make a profit."
+		break;
+	  case 3:
+		document.getElementById("hint").innerHTML = "You have to watch the markets over time. It may not be obvious in the begining what range of values stocks will  have"
+		break;
+	  case 4:
+		document.getElementById("hint").innerHTML = "Each stock has its own range of value. For example technology stocks might be more valuable than retail stocks."
+		break;
+	  case 5:
+		document.getElementById("hint").innerHTML = "Sometimes you can make more money by making a bunch of trades for a small profit fast than waiting a long time for a big profit."
+		break;
+	  case 6:
+		document.getElementById("hint").innerHTML = "In the real world you have to worry about taxes. You have to pay more taxes on fast trades then if you hold onto stocks for a long time before trading. Luckily there are no taxes here."
+		break;
+	  case 7:
+		document.getElementById("hint").innerHTML = "Sometimes stocks change prices quickly and sometimes they stay around a certain price for a while. That's why having money in multiple stocks is important."
+		break;
+	  case 8:
+		document.getElementById("hint").innerHTML = "There tend to be trends. If something is moving up there is a slightly greater chance it will continue that way than that it will reverse and go the other way."
+		break;
+	  case 9:
+		document.getElementById("hint").innerHTML = "Every stock has a minimum and maximum price. But they are different for different stocks."
+		break;
+	  case 10:
+		document.getElementById("hint").innerHTML = "Try to get a sense of what the high range is for each stock and don't ever buy it if it is getting close to that range."
+		break;
+	  case 11:
+		document.getElementById("hint").innerHTML = "Avoid selling stock below what you paid for it. You can see what you paid so try to always sell higher than that price."
+		break;
+	  case 12:
+		document.getElementById("hint").innerHTML = "Sometimes it's better to buy nothing if no stocks are at a low point."
+		break;
+	  case 13:
+		document.getElementById("hint").innerHTML = "Once you know the markets well you might choose to throw all your money into a single stock that is at it's very lowest point. But it's still possible that the stock price will get stuck down low for a while."
+		break;
+	  case 14:
+		document.getElementById("hint").innerHTML = "Sometimes you just get lucky."
+		break;
+	  default:
+		document.getElementById("hint").innerHTML = "Buy several different stocks not just one. Otherwise you can get stuck if the market doesn't go your way."
+	} 
+}
+
 // pause the game
 function pause() {
 	if(!pauseflag) {
@@ -316,16 +412,17 @@ function restart() {
 
 // Game over
 function end() {
-	if( profit > highscore )
+	score = cash + value;
+	if( score > highscore )
 	{
-		localStorage.setItem("highscore", profit.toFixed(2));
+		localStorage.setItem("highscore", score.toFixed(2));
 	}
 	localStorage.setItem("previous", highscore);
+	
+	//kongregate.stats.submit("Profit", score);
 		
-	//kongregate.stats.submit("Profit", profit);
-		
-	var sendString = profit.toString();
-	window.location.assign("end.html?" + profit);	
+	var sendString = score.toString();
+	window.location.assign("end.html?" + score);	
 }
 
 
